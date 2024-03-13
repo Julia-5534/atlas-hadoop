@@ -9,10 +9,5 @@ def createdir(l):
     # Create a client
     client = Client('localhost', 9000)
 
-    for dir_path in l:
-        # Create directory in HDFS
-        client.mkdir([dir_path])
-
-
-if __name__ == "__main__":
-    createdir(["/holbies/input"])
+    for created_dir in client.mkdir(l, create_parent=True):
+        print(created_dir)

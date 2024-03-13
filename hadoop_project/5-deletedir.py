@@ -9,11 +9,8 @@ def deletedir(l):
     # Create a client
     client = Client('localhost', 9000)
 
-    for dir_path in l:
-        # Delete directory in HDFS
-        client.rmdir([dir_path])
-
-
-if __name__ == "__main__":
-    deletedir(["/holbies/output"])
-    deletedir(["/holbies/input"])
+    try:
+        for deleted_dir in client.delete(l, recurse=True):
+            print(deleted_dir)
+    except Exception:
+        pass

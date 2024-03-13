@@ -1,32 +1,34 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2.7
 """Task 7"""
 
 import sys
 
 
-def reducer():
-    """The Reducer"""
-    # Initialize an array to store the top ten salaries
-    top_salaries = []
+top_salaries = []
+count = 0
 
-    for line in sys.stdin:
-        # Split the line into id, company, and totalyearlycompensation
-        id, rest = line.strip().split('\t')
-        company, totalyearlycompensation = rest.split(',')
+for line in sys.stdin:
+    data = line.strip().split('\t')
 
-        # Convert totalyearlycompensation to float
-        totalyearlycompensation = float(totalyearlycompensation)
+    if len(data) >= 2:
+        id = data[0]
+        if id == 'id':
+            continue  # Skip the header line
+        else:
+            key_value_pairs = data[1].split(',')
+            company = key_value_pairs[0]
+            Salary = float(key_value_pairs[1])
 
-        # Add the salary to the top salaries array
-        top_salaries.append((totalyearlycompensation, id, company))
+            # Build a 10-element long list
+            if count < 10:
+                top_salaries.append((id, company, Salary))
+                top_salaries.sort(key=lambda x: x[2], reverse=True)
+                count += 1
+            else:
+                top_salaries.append((id, company, Salary))
+                top_salaries.sort(key=lambda x: x[2], reverse=True)
+                top_salaries.pop()
 
-        # If the array has more than ten salaries, remove the smallest one
-        if len(top_salaries) > 10:
-            top_salaries.remove(min(top_salaries))
-
-    # Sort the top salaries array in descending order
-    top_salaries.sort(reverse=True)
-
-    # Print the top ten salaries
-    for totalyearlycompensation, id, company in top_salaries:
-        print(f"{id}\t{company},{totalyearlycompensation}")
+# Print the top ten salaries
+for id, company, Salary in top_salaries:
+    print("{}\t{},{}".format(id, company, Salary))
