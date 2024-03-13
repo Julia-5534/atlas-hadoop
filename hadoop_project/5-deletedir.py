@@ -12,3 +12,8 @@ def deletedir(l):
     for dir_path in l:
         # Delete directory in HDFS
         client.rmdir([dir_path])
+
+
+if __name__ == "__main__":
+    deletedir(["/holbies/output"])
+    deletedir(["/holbies/input"])

@@ -30,7 +30,3 @@ def reducer():
     # Print the top ten salaries
     for totalyearlycompensation, id, company in top_salaries:
         print(f"{id}\t{company},{totalyearlycompensation}")
-
-
-if __name__ == "__main__":
-    reducer()

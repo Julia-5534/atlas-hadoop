@@ -21,7 +21,3 @@ def mapper():
 
         # Print the id, company, and totalyearlycompensation fields
         print(f"{id}\t{company},{totalyearlycompensation}")
-
-
-if __name__ == "__main__":
-    mapper()
